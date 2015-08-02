@@ -187,8 +187,18 @@ endsWithOneOf = dropFinalBlank . keepDelimsR . oneOf
 splitOneOf : Eq a => List a -> List a -> List (List a)
 splitOneOf = List.Split.split . dropDelims . oneOf
 
+||| A helper for splitOneOf that handles packing and unpacking Strings behind
+||| the scenes.
+splitOneOf' : String -> String -> List String
+splitOneOf' sp str = map pack (splitOneOf (unpack sp) (unpack str))
+
 splitOn : Eq a => List a -> List a -> List (List a)
 splitOn = List.Split.split . dropDelims . onSublist
+
+||| A helper for splitOn that handles packing and unpacking Strings behind the
+||| scenes.
+splitOn' : String -> String -> List String
+splitOn' sp str = map pack (splitOn (unpack sp) (unpack str))
 
 splitWhen : (a -> Bool) -> List a -> List (List a)
 splitWhen = List.Split.split . dropDelims . whenElt
