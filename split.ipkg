@@ -1,0 +1,5 @@
+package split
+
+modules   = List.Split
+sourcedir = src
+opts      = "-p contrib --total"
